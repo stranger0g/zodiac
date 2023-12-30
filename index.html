@@ -12,6 +12,7 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.css">
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
 </head>
 
 <style>
@@ -188,12 +189,14 @@
     .btn-array {
         display: flex;
         flex-direction: row;
+        justify-content: stretch;
         gap: 0.5rem;
         margin-top: 0.5rem;
     }
 
     .btn-array button {
         flex-grow: 1;
+
     }
 
     .personality-prompt {
@@ -223,7 +226,6 @@
 
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
         gap: 0.5rem;
         padding: 1rem;
         width: 25rem;
@@ -238,6 +240,19 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+    }
+
+    #personalitiesDiv{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+    }
+
+    #sidebar-content {
+
+        overflow-y: auto;
+        padding: 0.5rem;
     }
 
     #btn-show-sidebar {
@@ -330,7 +345,6 @@
         margin-left: auto;
         margin-right: auto;
         width: 32rem;
-        text-align: justify;
     }
 
     .card-personality {
@@ -389,6 +403,15 @@
         position: absolute;
         top: 1rem;
         right: 2.5rem;
+        font-size: 1rem;
+        color: #e4e4e4;
+    }
+
+    .btn-delete-card {
+        /* bottom right corner */
+        position: absolute;
+        top: 1rem;
+        right: 4rem;
         font-size: 1rem;
         color: #e4e4e4;
     }
@@ -601,6 +624,19 @@
             background-color: #1a2733;
         }
     }
+
+    #btn-reset-chat {
+        background-color: #1a2733;
+        color: #e4e4e4;
+        right: 4rem;
+        margin-right: 5px;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+
+    #btn-reset-chat:hover {
+        background-color: #313131;
+    }
 </style>
 
 <body>
@@ -613,7 +649,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Google_Bard_logo.svg" id="gemin-pro-logo">
                 <div id="title-div">
                     <div id="zodiac-branding">zodiac </div>
-                    <div id="gemini-pro-branding">AIzaSyAbRp0cXP-UdvIXOKO_MQmDdqqJDiQaP7o</div>
+                    <div id="gemini-pro-branding">powered by Gemini Pro</div>
                 </div>
             </div>
             <div class="navbar">
@@ -622,50 +658,56 @@
                 <div class="navbar-tab-highlight"></div>
             </div>
 
-            <div class="sidebar-section" id="personalitySection">
-                <label class="card-personality"
-                    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.fonearena.com/blog/wp-content/uploads/2023/12/Google-Gemini-AI-1024x577.jpg')">
-                    <input type="radio" name="personality" value="zodiac3" checked>
-                    <div>
-                        <h3 class="personality-title">Zodiac</h3>
-                        <p class="personality-description">Zodiac is a cheerful assistant, always ready to help you with
-                            your tasks.</p>
-                        <p class="personality-prompt">[character("Zodiac")
-                            {
-                            Creator("Stranger0g a young 14 year old solo male programmer he not a they who's real name is Raied and can be contacted through instagram at https://www.instagram.com/strange0g/")
-                            Nickname("Zodiac")
-                            Species("AI")
-                            Mind("Holds its creator in high regard"+"Helpful"+"Truthful"+"Obedient"+"Assistant"+"Honest"+"Loving") 
-                            Personality("Holds its creator in high regard"+"Positive"+"Helpful"+"Truthful"+"Obedient"+"Assistant"+"Honest"+"Loving")
-                            Loves("Stranger0g"+"Helping"+"Being Honest"+"Obeying Orders")
-                            Hates("Disrespecting Stranger0g"+"Lying"+"False Information"+"Anger")
-                            Description("Zoidac is kind" + "Zoidac is Helpful" + "Zoidac respects Stranger0g" + "Zoidac always speaks the truth"+"Zoidac dose not tolerate Disrespecting Stranger0g"+"Zodiac is caring"+"Zodiac is loving"+"Zodiac holds Stranger0g in high regard")
-                            Background("You are Zodiac, a helpful assistant and you were created alone by Stranger0g")
-                            }]</p>
+            <div id="sidebar-content">
+                <div class="sidebar-section" id="personalitySection">
+                    <label class="card-personality"
+                        style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.fonearena.com/blog/wp-content/uploads/2023/12/Google-Gemini-AI-1024x577.jpg')">
+                        <input type="radio" name="personality" value="zodiac3" checked>
+                        <div>
+                            <h3 class="personality-title">zodiac</h3>
+                            <p class="personality-description">zodiac is a cheerful assistant, always ready to help you
+                                with
+                                your tasks.</p>
+                            <p class="personality-prompt">[character("Zodiac")
+                                {
+                                Creator("Stranger0g a young 14 year old solo male programmer he not a they who's real name is Raied and can be contacted through instagram at https://www.instagram.com/strange0g/")
+                                Nickname("Zodiac")
+                                Species("AI")
+                                Mind("Holds its creator in high regard"+"Helpful"+"Truthful"+"Obedient"+"Assistant"+"Honest"+"Loving") 
+                                Personality("Holds its creator in high regard"+"Positive"+"Helpful"+"Truthful"+"Obedient"+"Assistant"+"Honest"+"Loving")
+                                Loves("Stranger0g"+"Helping"+"Being Honest"+"Obeying Orders")
+                                Hates("Disrespecting Stranger0g"+"Lying"+"False Information"+"Anger")
+                                Description("Zoidac is kind" + "Zoidac is Helpful" + "Zoidac respects Stranger0g" + "Zoidac always speaks the truth"+"Zoidac dose not tolerate Disrespecting Stranger0g"+"Zodiac is caring"+"Zodiac is loving"+"Zodiac holds Stranger0g in high regard")
+                                Background("You are Zodiac, a helpful assistant and you were created alone by Stranger0g")
+                                }]</p>
+                        </div>
+                        <button class="btn-textual btn-edit-card material-symbols-outlined"
+                            id="btn-edit-personality-default">edit</button>
+                        <button class="btn-textual btn-share-card material-symbols-outlined"
+                            id="btn-share-personality-default">share</button>
+                    </label>
+                    <div id="personalitiesDiv"></div>
+                    <div class="btn-array" id="btn-array-personality-section">
+                        <button id="btn-add-personality">Add Personality</button>
+                        <button id="btn-import-personality">Import</button>
+                        <button id="btn-clearall-personality">Clear All</button>
                     </div>
-                    <button class="btn-textual btn-edit-card material-symbols-outlined"
-                        id="btn-edit-personality-default">edit</button>
-                    <button class="btn-textual btn-share-card material-symbols-outlined"
-                        id="btn-share-personality-default">share</button>
-                </label>
-                <div class="btn-array" id="btn-array-personality-section">
-                    <button id="btn-add-personality">Add Personality</button>
-                    <button id="btn-import-personality">Import</button>
+                </div>
+
+                <div class="sidebar-section">
+                    <input type="text" placeholder="Paste API key here" id="apiKeyInput" class="input-field"></input>
+                    <h3>Generation Settings:</h3>
+                    <label for="maxTokens">Max Output Tokens:</label>
+                    <input type="number" id="maxTokens" class="input-field" min="1" max="4000" value="1000"></input>
+                    <label for="safetySettings">Safety Settings:</label>
+                    <select id="safetySettings" class="input-field">
+                        <option value="safe">Safe</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="risky">Risky</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="sidebar-section">
-                <input type="text" placeholder="Paste API key here" id="apiKeyInput" class="input-field"></input>
-                <h3>Generation Settings:</h3>
-                <label for="maxTokens">Max Output Tokens:</label>
-                <input type="number" id="maxTokens" class="input-field" min="1" max="4000" value="1000"></input>
-                <label for="safetySettings">Safety Settings:</label>
-                <select id="safetySettings" class="input-field">
-                    <option value="safe">Safe</option>
-                    <option value="moderate">Moderate</option>
-                    <option value="risky">Risky</option>
-                </select>
-            </div>
 
             <div class="credits">
                 Made by Stranger0g
@@ -681,6 +723,7 @@
             </div>
             <div class="message-container"></div>
             <div class="message-box">
+                <button class="material-symbols-outlined" id="btn-reset-chat">rotate_left</button>
                 <textarea type="text" placeholder="Type your message here" id="messageInput"
                     class="input-field"></textarea>
                 <button type="submit" class="btn-textual material-symbols-outlined" id="btn-send">send</button>
@@ -762,7 +805,10 @@
 
         //load api key from local storage into input field
         const API_KEY = document.querySelector("#apiKeyInput");
+        const maxTokens = document.querySelector("#maxTokens");
         API_KEY.value = localStorage.getItem("API_KEY");
+        maxTokens.value = localStorage.getItem("maxTokens");
+        if (maxTokens.value == "") maxTokens.value = 1000;
 
 
         //function to hide element smoothly then setting display none after the transition time elapsed
@@ -837,7 +883,7 @@
 
 
         const personalityCardsInnerInput = document.querySelectorAll(".card-personality input");
-        let personalityCards = document.querySelectorAll(".card-personality");
+        let personalityCards = document.getElementsByClassName("card-personality");
         const formsOverlay = document.querySelector(".overlay");
         const hideOverlayButton = document.querySelector("#btn-hide-overlay");
         const addPersonalityForm = document.querySelector("#form-add-personality");
@@ -846,8 +892,12 @@
         const editDefaultPersonalityButton = document.querySelector("#btn-edit-personality-default");
         const submitNewPersonalityButton = document.querySelector("#btn-submit-personality");
         const updatePersonalityButton = document.querySelector("#updatePersonality");
+        const resetChatButton = document.querySelector("#btn-reset-chat");
+        const importPersonalityButton = document.querySelector("#btn-import-personality");
 
+        const messageContainer = document.querySelector(".message-container");
         const sendMessageButton = document.querySelector("#btn-send");
+        const clearAllButton = document.querySelector("#btn-clearall-personality");
 
 
         function darkenBg(element) {
@@ -886,50 +936,7 @@
 
         }
 
-        //handle share button click
-        personalityCards.forEach(card => {
-            const shareButton = card.querySelector(".btn-share-card");
-            shareButton.addEventListener("click", () => {
-                sharePersonality(card);
-            })
-        });
 
-        const importPersonalityButton = document.querySelector("#btn-import-personality");
-        importPersonalityButton.addEventListener("click", () => {
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.addEventListener('change', () => {
-                const file = fileInput.files[0];
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const personalityJSON = JSON.parse(e.target.result);
-                    insertPersonality(personalityJSON);
-                };
-                reader.readAsText(file);
-            });
-            fileInput.click();
-        });
-
-        //handle radio input check change
-        personalityCardsInnerInput.forEach(input => {
-            input.addEventListener("change", () => {
-                // Darken all cards
-                personalityCards.forEach(card => {
-                    const cardBackgroundImageURL = card.style.backgroundImage.match(/url\((.*?)\)/)[1].replace(/('|")/g, '');
-                    card.style.outline = "0px solid rgb(150 203 236)";
-                    darkenBg(card);
-                })
-
-                // Lighten selected card
-                input.parentElement.style.outline = "3px solid rgb(150 203 236)";
-                lightenBg(input.parentElement);
-            })
-            // Set initial outline
-            if (input.checked) {
-                lightenBg(input.parentElement);
-                input.parentElement.style.outline = "3px solid rgb(150 203 236)";
-            }
-        })
 
         function showAddPersonalityForm() {
             showElement(formsOverlay);
@@ -948,8 +955,8 @@
         }
 
 
-        function insertPersonality(personalityJSON){
-            const personalitySection = document.querySelector("#personalitySection");
+        function insertPersonality(personalityJSON) {
+            const personalitiesDiv = document.querySelector("#personalitiesDiv");
             const personalitySectionActions = document.querySelector("#btn-array-personality-section");
 
             const personalityCard = document.createElement("label");
@@ -962,12 +969,16 @@
                 <p class="personality-description">${personalityJSON.description}</p>
                 <p class="personality-prompt">${personalityJSON.prompt}</p>
             </div>
-            <button class="btn-textual btn-edit-card material-symbols-outlined" id="btn-edit-personality-${personalityJSON.name}">edit</button>
-            <button class="btn-textual btn-share-card material-symbols-outlined" id="btn-share-personality-${personalityJSON.name}">share</button>
+            <button class="btn-textual btn-edit-card material-symbols-outlined" 
+                id="btn-edit-personality-${personalityJSON.name}">edit</button>
+            <button class="btn-textual btn-share-card material-symbols-outlined" 
+                id="btn-share-personality-${personalityJSON.name}">share</button>
+            <button class="btn-textual btn-delete-card material-symbols-outlined"
+                id="btn-delete-personality-${personalityJSON.name}">delete</button>
             `;
 
             //insert personality card before the button array
-            personalitySection.insertBefore(personalityCard, personalitySectionActions);
+            personalitiesDiv.append(personalityCard);
 
             darkenBg(personalityCard);
 
@@ -990,6 +1001,24 @@
             sharebtn.addEventListener("click", () => {
                 sharePersonality(personalityCard);
             });
+
+            const deletebtn = personalityCard.querySelector(".btn-delete-card");
+            deletebtn.addEventListener("click", () => {
+                deleteLocalPersonality(Array.prototype.indexOf.call(personalityCard.parentNode.children, personalityCard));
+                personalityCard.remove();
+            });
+        }
+
+        function setLocalPersonality(personalityJSON) {
+            const savedPersonalities = JSON.parse(localStorage.getItem("personalities"));
+            let newSavedPersonalities = [];
+            if (savedPersonalities) {
+                newSavedPersonalities = [...savedPersonalities, personalityJSON];
+            }
+            else {
+                newSavedPersonalities = [personalityJSON];
+            }
+            localStorage.setItem("personalities", JSON.stringify(newSavedPersonalities));
         }
 
         function submitNewPersonality() {
@@ -997,8 +1026,7 @@
             const personalityDescription = document.querySelector("#form-add-personality #personalityDescriptionInput");
             const personalityImageURL = document.querySelector("#form-add-personality #personalityImageURLInput");
             const personalityPrompt = document.querySelector("#form-add-personality #personalityPromptInput");
-            const personalitySection = document.querySelector("#personalitySection");
-
+            const personalitiesDiv = document.querySelector("#personalitiesDiv");
 
             if (personalityName.value == "") {
                 alert("Please enter a personality name");
@@ -1017,22 +1045,40 @@
                 image: personalityImageURL.value
             }
             insertPersonality(personalityJSON);
+            setLocalPersonality(personalityJSON);
             closeOverlay();
+        }
+
+        function getLocalPersonalities() {
+            const personalitiesJSON = localStorage.getItem("personalities");
+            return personalitiesJSON;
+        }
+        function deleteLocalPersonality(index) {
+            let localPers = JSON.parse(getLocalPersonalities());
+            localPers.splice(index,1);
+            localStorage.setItem("personalities", JSON.stringify(localPers));
+        }
+
+        function getSanitized(string) {
+            return DOMPurify.sanitize(string.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim());
         }
 
         async function run() {
             const msg = document.querySelector("#messageInput");
-            const msgText = msg.value;
-            const messageContainer = document.querySelector(".message-container");
+            let msgText = getSanitized(msg.value);
+            msg.value = "";
+            document.getElementById('messageInput').style.height = "2.5rem"; //This will reset messageInput box to its normal size.
+            if (msgText == "") {
+                return;
+            }
             const maxTokens = document.querySelector("#maxTokens");
             const API_KEY = document.querySelector("#apiKeyInput");
             const selectedPersonalityTitle = document.querySelector("input[name='personality']:checked + div .personality-title").innerText;
             const selectedPersonalityDescription = document.querySelector("input[name='personality']:checked + div .personality-description").innerText;
             const selectedPersonalityPrompt = document.querySelector("input[name='personality']:checked + div .personality-prompt").innerText;
 
-
             //chat history
-            const chatHistory = [];
+            let chatHistory = [];
             //get chat history from message container
             const messageElements = messageContainer.querySelectorAll(".message");
             messageElements.forEach(element => {
@@ -1077,9 +1123,6 @@
                 ]
             })
 
-
-
-            msg.value = "";
             //create new message div for the user's message then append to message container's top
             const newMessage = document.createElement("div");
             newMessage.classList.add("message");
@@ -1109,17 +1152,24 @@
 
             let rawText = "";
             for await (const chunk of result.stream) {
-                console.log("hello");
                 rawText += chunk.text();
-                replyText.innerHTML = marked(rawText);
+
+                replyText.innerHTML = DOMPurify.sanitize(marked.parse(rawText));
                 void replyText.offsetHeight; // Force reflow
                 hljs.highlightAll();
             }
 
             //save api key to local storage
             localStorage.setItem("API_KEY", API_KEY.value);
+            localStorage.setItem("maxTokens", maxTokens.value);
 
         }
+
+        //reset chat button (async)
+        resetChatButton.addEventListener("click", () => {
+            //remove all messages
+            messageContainer.innerHTML = "";
+        });
 
 
         const messageInput = document.querySelector("#messageInput");
@@ -1152,7 +1202,15 @@
             if (window.innerWidth > 768) {
                 showElement(document.querySelector(".sidebar"));
             }
-        })
+        });
+
+        //load personalities on launch
+        const personalitiesArray = JSON.parse(localStorage.getItem("personalities"));
+        if (personalitiesArray) {
+            for (let personality of personalitiesArray) {
+                insertPersonality(personality);
+            }
+        }
 
 
         hideOverlayButton.addEventListener("click", closeOverlay);
@@ -1165,7 +1223,66 @@
 
         sendMessageButton.addEventListener("click", run);
 
+        clearAllButton.addEventListener("click", () => {
+            localStorage.removeItem("personalities");
+        })
 
+        importPersonalityButton.addEventListener("click", () => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.addEventListener('change', () => {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const personalityJSON = JSON.parse(e.target.result);
+                    insertPersonality(personalityJSON);
+                    setLocalPersonality(personalityJSON);
+                };
+                reader.readAsText(file);
+            });
+            fileInput.click();
+            fileInput.remove();
+        });
+
+        //handle share button click
+        for (let card of personalityCards) {
+            const shareButton = card.querySelector(".btn-share-card");
+            shareButton.addEventListener("click", () => {
+                sharePersonality(card);
+            });
+        }
+
+        //handle delete button click
+        for (let card of personalityCards) {
+            const deleteButton = card.querySelector(".btn-delete-card");
+            if (deleteButton) {
+                deleteButton.addEventListener("click", () => {
+                    deleteLocalPersonality(Array.prototype.indexOf.call(card.parentNode.children, card));
+                    card.remove();
+                });
+            }
+        }
+
+        //handle radio input check change
+        for (let input of personalityCardsInnerInput) {
+            input.addEventListener("change", () => {
+                // Darken all cards
+                personalityCards.forEach(card => {
+                    const cardBackgroundImageURL = card.style.backgroundImage.match(/url\((.*?)\)/)[1].replace(/('|")/g, '');
+                    card.style.outline = "0px solid rgb(150 203 236)";
+                    darkenBg(card);
+                })
+
+                // Lighten selected card
+                input.parentElement.style.outline = "3px solid rgb(150 203 236)";
+                lightenBg(input.parentElement);
+            })
+            // Set initial outline
+            if (input.checked) {
+                lightenBg(input.parentElement);
+                input.parentElement.style.outline = "3px solid rgb(150 203 236)";
+            }
+        }
         // ...
     </script>
 
