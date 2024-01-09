@@ -242,19 +242,6 @@
         gap: 0.5rem;
     }
 
-    #personalitiesDiv{
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-
-    }
-
-    #sidebar-content {
-
-        overflow-y: auto;
-        padding: 0.5rem;
-    }
-
     #btn-show-sidebar {
         display: none;
     }
@@ -658,60 +645,54 @@
                 <div class="navbar-tab-highlight"></div>
             </div>
 
-            <div id="sidebar-content">
-                <div class="sidebar-section" id="personalitySection">
-                    <label class="card-personality"
-                        style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.fonearena.com/blog/wp-content/uploads/2023/12/Google-Gemini-AI-1024x577.jpg')">
-                        <input type="radio" name="personality" value="zodiac3" checked>
-                        <div>
-                            <h3 class="personality-title">zodiac</h3>
-                            <p class="personality-description">zodiac is a cheerful assistant, always ready to help you
-                                with
-                                your tasks.</p>
-                            <p class="personality-prompt">[character("Zodiac")
-                                {
-                                Creator("Stranger0g a young 14 year old solo male programmer he not a they who's real name is Raied and can be contacted through instagram at https://www.instagram.com/strange0g/")
-                                Nickname("Zodiac")
-                                Species("AI")
-                                Mind("Holds its creator in high regard"+"Helpful"+"Truthful"+"Obedient"+"Assistant"+"Honest"+"Loving") 
-                                Personality("Holds its creator in high regard"+"Positive"+"Helpful"+"Truthful"+"Obedient"+"Assistant"+"Honest"+"Loving")
-                                Loves("Stranger0g"+"Helping"+"Being Honest"+"Obeying Orders")
-                                Hates("Disrespecting Stranger0g"+"Lying"+"False Information"+"Anger")
-                                Description("Zoidac is kind" + "Zoidac is Helpful" + "Zoidac respects Stranger0g" + "Zoidac always speaks the truth"+"Zoidac dose not tolerate Disrespecting Stranger0g"+"Zodiac is caring"+"Zodiac is loving"+"Zodiac holds Stranger0g in high regard")
-                                Background("You are Zodiac, a helpful assistant and you were created alone by Stranger0g")
-                                }]</p>
-                        </div>
-                        <button class="btn-textual btn-edit-card material-symbols-outlined"
-                            id="btn-edit-personality-default">edit</button>
-                        <button class="btn-textual btn-share-card material-symbols-outlined"
-                            id="btn-share-personality-default">share</button>
-                    </label>
-                    <div id="personalitiesDiv"></div>
-                    <div class="btn-array" id="btn-array-personality-section">
-                        <button id="btn-add-personality">Add Personality</button>
-                        <button id="btn-import-personality">Import</button>
-                        <button id="btn-clearall-personality">Clear All</button>
+            <div class="sidebar-section" id="personalitySection">
+                <label class="card-personality"
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.fonearena.com/blog/wp-content/uploads/2023/12/Google-Gemini-AI-1024x577.jpg')">
+                    <input type="radio" name="personality" value="zodiac3" checked>
+                    <div>
+                        <h3 class="personality-title">Zodiac</h3>
+                        <p class="personality-description">Zodiac is a cheerful assistant, always ready to help you with
+                            your tasks.</p>
+                        <p class="personality-prompt">[character("Zodiac")
+                            {
+                            Creator("Stranger0g a young 14 year old solo male programmer he not a they who's real name is Raied and can be contacted through instagram at https://www.instagram.com/strange0g/")
+                            Nickname("Zodiac")
+                            Species("AI")
+                            Mind("Holds its creator in high regard"+"Helpful"+"Truthful"+"Obedient"+"Assistant"+"Honest"+"Loving") 
+                            Personality("Holds its creator in high regard"+"Positive"+"Helpful"+"Truthful"+"Obedient"+"Assistant"+"Honest"+"Loving")
+                            Loves("Stranger0g"+"Helping"+"Being Honest"+"Obeying Orders")
+                            Hates("Disrespecting Stranger0g"+"Lying"+"False Information"+"Anger")
+                            Description("Zoidac is kind" + "Zoidac is Helpful" + "Zoidac respects Stranger0g" + "Zoidac always speaks the truth"+"Zoidac dose not tolerate Disrespecting Stranger0g"+"Zodiac is caring"+"Zodiac is loving"+"Zodiac holds Stranger0g in high regard")
+                            Background("You are Zodiac, a helpful assistant and you were created alone by Stranger0g")
+                            }]</p>
                     </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <input type="text" placeholder="Paste API key here" id="apiKeyInput" class="input-field"></input>
-                    <h3>Generation Settings:</h3>
-                    <label for="maxTokens">Max Output Tokens:</label>
-                    <input type="number" id="maxTokens" class="input-field" min="1" max="4000" value="1000"></input>
-                    <label for="safetySettings">Safety Settings:</label>
-                    <select id="safetySettings" class="input-field">
-                        <option value="safe">Safe</option>
-                        <option value="moderate">Moderate</option>
-                        <option value="risky">Risky</option>
-                    </select>
+                    <button class="btn-textual btn-edit-card material-symbols-outlined"
+                        id="btn-edit-personality-default">edit</button>
+                    <button class="btn-textual btn-share-card material-symbols-outlined"
+                        id="btn-share-personality-default">share</button>
+                </label>
+                <div class="btn-array" id="btn-array-personality-section">
+                    <button id="btn-add-personality">Add Personality</button>
+                    <button id="btn-import-personality">Import</button>
                 </div>
             </div>
 
+            <div class="sidebar-section">
+                <input type="text" placeholder="Paste API key here" id="apiKeyInput" class="input-field"></input>
+                <h3>Generation Settings:</h3>
+                <label for="maxTokens">Max Output Tokens:</label>
+                <input type="number" id="maxTokens" class="input-field" min="1" max="4000" value="1000"></input>
+                <label for="safetySettings">Safety Settings:</label>
+                <select id="safetySettings" class="input-field">
+                    <option value="safe">Safe</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="risky">Risky</option>
+                </select>
+            </div>
 
             <div class="credits">
                 Made by Stranger0g
-                <a href="https://www.instagram.com/strange0g/">Instagram</a>
+                <a href="https://www.instagram.com/strange0g/">Source Code</a>
             </div>
         </div>
 
@@ -838,10 +819,10 @@
         const tabs = document.querySelectorAll(".navbar-tab");
         const sidebarViews = document.querySelectorAll(".sidebar-section");
         const highlight = document.querySelector(".navbar-tab-highlight");
-        highlight.style.width = `calc(100% / ${tabs.length})`;
+        highlight.style.width = `calc(100% / ${tabs.length})`;  
 
 
-
+    
         let currentTab = undefined;
         function navigateTo(tab) {
             if (tab == tabs[currentTab]) {
@@ -892,8 +873,6 @@
         const editDefaultPersonalityButton = document.querySelector("#btn-edit-personality-default");
         const submitNewPersonalityButton = document.querySelector("#btn-submit-personality");
         const updatePersonalityButton = document.querySelector("#updatePersonality");
-        const resetChatButton = document.querySelector("#btn-reset-chat");
-        const importPersonalityButton = document.querySelector("#btn-import-personality");
 
         const messageContainer = document.querySelector(".message-container");
         const sendMessageButton = document.querySelector("#btn-send");
@@ -955,8 +934,8 @@
         }
 
 
-        function insertPersonality(personalityJSON) {
-            const personalitiesDiv = document.querySelector("#personalitiesDiv");
+        function insertPersonality(personalityJSON){
+            const personalitySection = document.querySelector("#personalitySection");
             const personalitySectionActions = document.querySelector("#btn-array-personality-section");
 
             const personalityCard = document.createElement("label");
@@ -1049,20 +1028,6 @@
             closeOverlay();
         }
 
-        function getLocalPersonalities() {
-            const personalitiesJSON = localStorage.getItem("personalities");
-            return personalitiesJSON;
-        }
-        function deleteLocalPersonality(index) {
-            let localPers = JSON.parse(getLocalPersonalities());
-            localPers.splice(index,1);
-            localStorage.setItem("personalities", JSON.stringify(localPers));
-        }
-
-        function getSanitized(string) {
-            return DOMPurify.sanitize(string.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim());
-        }
-
         async function run() {
             const msg = document.querySelector("#messageInput");
             let msgText = getSanitized(msg.value);
@@ -1123,6 +1088,9 @@
                 ]
             })
 
+
+
+            msg.value = "";
             //create new message div for the user's message then append to message container's top
             const newMessage = document.createElement("div");
             newMessage.classList.add("message");
@@ -1153,8 +1121,7 @@
             let rawText = "";
             for await (const chunk of result.stream) {
                 rawText += chunk.text();
-
-                replyText.innerHTML = DOMPurify.sanitize(marked.parse(rawText));
+                replyText.innerHTML = marked(rawText);
                 void replyText.offsetHeight; // Force reflow
                 hljs.highlightAll();
             }
